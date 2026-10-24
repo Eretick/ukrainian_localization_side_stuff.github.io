@@ -7,324 +7,431 @@
     --text-muted: #64748b;
     --border: #e2e8f0;
     --radius: 12px;
-}
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
+    /* === КЛЮЧОВІ ЗМІННІ === */
+    --container-max: 1200px;     /* макс. ширина контейнера */
+    --text-width: 680px;         /* запасна змінна (вже не обмежуємо текст) */
 
-body {
-    background-color: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
 
-/* Навігація */
-header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+    body {
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
 
-.nav-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
-}
+    /* === Навігація === */
+    header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
 
-.logo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--primary);
-    text-decoration: none;
-}
+    .nav-container {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+    }
 
-nav {
-    display: flex;
-    gap: 0.5rem;
-}
+    .logo {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-decoration: none;
+    }
 
-.nav-link {
-    text-decoration: none;
-    color: var(--text-muted);
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    transition: all 0.2s;
-}
+    nav { display: flex; gap: 0.5rem; }
 
-.nav-link:hover {
-    color: var(--primary);
-    background: #f1f5f9;
-}
+    .nav-link {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+    }
 
-.nav-link.active {
-    color: #fff;
-    background: var(--primary);
-}
+    .nav-link:hover { color: var(--primary); background: #f1f5f9; }
+    .nav-link.active { color: #fff; background: var(--primary); }
 
-/* Контент */
-main {
-    flex: 1;
-    max-width: 1000px;
-    width: 100%;
-    margin: 2.5rem auto;
-    padding: 0 1.5rem;
-}
+    /* === Main — широкий контейнер === */
+    main {
+        flex: 1;
+        width: 100%;
+        max-width: var(--container-max);
+        margin: 2.5rem auto;
+        padding: 0 1.5rem;
+    }
 
-.page-title {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-}
+    .page-title {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+    }
 
-.card {
-    background: var(--surface);
-    padding: 2rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
+    /* =========================================================
+       УНІВЕРСАЛЬНЕ ПРАВИЛО: текст І зображення — однакова ширина
+       (повна ширина контейнера 1200px). Для читабельності на wide
+       екранах — трохи більший шрифт + більший line-height.
+       ========================================================= */
 
-.card p {
-    margin-bottom: 1rem;
-}
+    /* Текстові елементи — на повну ширину контейнера */
+    main > p,
+    main > h2,
+    main > h3,
+    main > h4,
+    main > ul,
+    main > ol,
+    main > blockquote,
+    .spoiler-content > p,
+    .spoiler-content > h2,
+    .spoiler-content > h3,
+    .spoiler-content > h4,
+    .spoiler-content > ul,
+    .spoiler-content > ol,
+    .spoiler-content > blockquote {
+        margin: 0 0 1rem 0;
+        /* max-width прибрано — текст займає всю ширину контейнера */
+    }
 
-/* Галерея */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
+    main > h2,
+    .spoiler-content > h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
 
-.media-card {
-    background: var(--surface);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    overflow: hidden;
-}
+    main > h3,
+    .spoiler-content > h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
 
-.media-box {
-    background: #000;
-    aspect-ratio: 16 / 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    main > p,
+    .spoiler-content > p {
+        margin-bottom: 1.2rem;
+    }
 
-.media-box img, .media-box video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    /* Зображення та відео — та сама ширина, що й текст (контейнер) */
+    main > img,
+    main > video,
+    .spoiler-content > img,
+    .spoiler-content > video {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+    }
 
-.audio-box {
-    padding: 1rem;
-    background: #f1f5f9;
-}
+    /* Зображення всередині <p>, <li> — звичайні інлайн */
+    main p img,
+    main li img,
+    .spoiler-content p img,
+    .spoiler-content li img {
+        display: inline;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        margin: 0;
+        border: none;
+        vertical-align: middle;
+    }
 
-audio {
-    width: 100%;
-}
+    /* === Контейнерні елементи — повна ширина === */
+    main > .spoiler-list,
+    main > .grid,
+    main > .card,
+    main > hr,
+    main > figure {
+        max-width: 100%;
+        margin: 1.5rem 0;
+    }
 
-.media-info {
-    padding: 1rem;
-}
+    /* === Сітка-роздільник <hr> — тонша === */
+    main > hr {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 2rem 0;
+    }
 
-.tag {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--primary);
-    text-transform: uppercase;
-    margin-bottom: 0.25rem;
-    display: block;
-}
+    /* === Card === */
+    .card {
+        background: var(--surface);
+        padding: 2rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
 
-footer {
-    text-align: center;
-    padding: 1.5rem;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-top: auto;
-}
+    .card p { margin-bottom: 1rem; }
 
-/* --------------------------------  spoilers  --------------------------------- */
-/* --- Spoiler list container --- */
-.spoiler-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; /* Spacing between spoilers */
-    max-width: 800px;
-    margin: 0 auto;
-}
+    /* === Галерея === */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
 
-/* --- Spoiler item wrapper --- */
-.spoiler-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
+    .media-card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        overflow: hidden;
+    }
 
-.spoiler-item:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
+    .media-box {
+        background: #000;
+        aspect-ratio: 16 / 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-/* --- Spoiler title clickable button --- */
-.spoiler-title {
-    padding: 1.25rem 1.5rem;
-    font-size: 1.15rem;
-    font-weight: 600;
-    cursor: pointer;
-    list-style: none; /* Hide default arrow indicator in Chrome/Firefox */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-    background-color: var(--surface);
-    transition: background-color 0.2s;
-}
+    .media-box img, .media-box video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-.spoiler-title::-webkit-details-marker {
-    display: none; /* Hide default arrow indicator in Safari */
-}
+    .audio-box { padding: 1rem; background: #f1f5f9; }
+    audio { width: 100%; }
+    .media-info { padding: 1rem; }
 
-.spoiler-title:hover {
-    background-color: #f8fafc;
-}
+    .tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+        display: block;
+    }
 
-/* --- Custom arrow indicator icon --- */
-.spoiler-title::after {
-    content: '';
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid var(--text-muted);
-    border-bottom: 2px solid var(--text-muted);
-    transform: rotate(45deg);
-    transition: transform 0.25s ease;
-    margin-left: 1rem;
-}
+    footer {
+        text-align: center;
+        padding: 1.5rem;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-top: auto;
+    }
 
-/* --- Arrow animation on expansion --- */
-.spoiler-item[open] .spoiler-title::after {
-    transform: rotate(-135deg);
-}
+    /* === Spoilers === */
+    .spoiler-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        margin: 1.5rem 0;
+    }
 
-.spoiler-item[open] .spoiler-title {
-    border-bottom: 1px solid var(--border);
-    background-color: #f1f5f9; /* Subtle highlight for expanded header */
-}
+    .spoiler-item {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.2s;
+    }
 
-/* --- Expanded spoiler body content --- */
-.spoiler-content {
-    padding: 1.5rem;
-    background: var(--surface);
-}
+    .spoiler-item:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
 
-/* --- Media block styling within spoiler --- */
-.spoiler-media {
-    margin-top: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+    .spoiler-title {
+        padding: 1.25rem 1.5rem;
+        font-size: 1.15rem;
+        font-weight: 600;
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
+        background-color: var(--surface);
+        transition: background-color 0.2s;
+    }
 
-.spoiler-media img,
-.spoiler-media video {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    display: block;
-}
+    .spoiler-title::-webkit-details-marker { display: none; }
+    .spoiler-title:hover { background-color: #f8fafc; }
 
-img, video {
-    max-width: 100%;  /* Ensures the media never exceeds its container width */
-    height: auto;     /* Maintains the original aspect ratio automatically */
-    display: block;   /* Removes unwanted blank spacing under the asset */
-}
+    .spoiler-title::after {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid var(--text-muted);
+        border-bottom: 2px solid var(--text-muted);
+        transform: rotate(45deg);
+        transition: transform 0.25s ease;
+        margin-left: 1rem;
+        flex-shrink: 0;
+    }
 
-/* quotes */
-blockquote {
-    position: relative;
-    margin: 24px 0;
-    padding: 18px 24px 18px 28px;
+    .spoiler-item[open] .spoiler-title::after { transform: rotate(-135deg); }
+    .spoiler-item[open] .spoiler-title {
+        border-bottom: 1px solid var(--border);
+        background-color: #f1f5f9;
+    }
 
-    background: #eef4ff;
-    border-left: 4px solid #2d5df5;
-    border-radius: 0 8px 8px 0;
+    .spoiler-content {
+        padding: 1.5rem;
+        background: var(--surface);
+    }
 
-    color: #24344d;
-    font-size: 16px;
-    line-height: 1.7;
-    font-style: italic;
+    /* === Quotes === */
+    blockquote {
+        position: relative;
+        margin: 24px 0;
+        padding: 18px 24px 18px 28px;
 
-    box-shadow: 0 2px 8px rgba(35, 75, 160, 0.06);
-}
+        background: #eef4ff;
+        border-left: 4px solid #2d5df5;
+        border-radius: 0 8px 8px 0;
 
-blockquote::before {
-    content: "“";
-    display: block;
-    margin-bottom: -12px;
+        color: #24344d;
+        font-size: 16px;
+        line-height: 1.7;
+        font-style: italic;
 
-    color: #2d5df5;
-    font-family: Georgia, serif;
-    font-size: 42px;
-    font-weight: bold;
-    font-style: normal;
-    line-height: 1;
-}
+        box-shadow: 0 2px 8px rgba(35, 75, 160, 0.06);
+    }
 
-blockquote p {
-    margin: 0;
-}
+    blockquote::before {
+        content: "\201C";
+        display: block;
+        margin-bottom: -12px;
+        color: #2d5df5;
+        font-family: Georgia, serif;
+        font-size: 42px;
+        font-weight: bold;
+        font-style: normal;
+        line-height: 1;
+    }
 
-blockquote p + p {
-    margin-top: 10px;
-}
+    blockquote p { margin: 0; }
+    blockquote p + p { margin-top: 10px; }
 
+    q {
+        display: inline;
+        padding: 2px 5px;
+        background: #eef4ff;
+        color: #2454d8;
+        border-radius: 4px;
+        font-style: italic;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+    }
 
-q {
-    display: inline;
-    padding: 2px 5px;
+    q::before { content: "\00AB"; color: #2d5df5; font-weight: bold; }
+    q::after  { content: "\00BB (c)"; color: #2d5df5; font-weight: bold; font-style: normal; font-size: 0.8em; }
 
-    background: #eef4ff;
-    color: #2454d8;
-    border-radius: 4px;
+    /* === Interaction === */
+    main img,
+    article img,
+    .content img {
+        cursor: zoom-in;
+        transition: filter 0.2s ease;
+    }
 
-    font-style: italic;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-}
+    main img:hover,
+    article img:hover,
+    .content img:hover {
+        filter: brightness(0.95);
+    }
 
-q::before {
-    content: "«";
-    color: #2d5df5;
-    font-weight: bold;
-}
+    .image-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(8, 12, 24, 0.92);
+        cursor: zoom-out;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
 
-q::after {
-    content: "» (c)";
-    color: #2d5df5;
-    font-weight: bold;
-    font-style: normal;
-    font-size: 0.8em;
-}
+    .image-lightbox.active { opacity: 1; visibility: visible; }
+
+    .image-lightbox img {
+        display: block;
+        max-width: 95vw;
+        max-height: 94vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 6px;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+        cursor: zoom-out;
+    }
+
+    .image-lightbox-close {
+        position: absolute;
+        top: 16px;
+        right: 24px;
+        color: white;
+        font-size: 36px;
+        line-height: 1;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    /* === На широких екранах — трохи більший шрифт для читабельності ===
+       Оскільки текст тепер на повну ширину (1200px), довгі рядки треба
+       компенсувати більшим font-size + line-height. */
+    @media (min-width: 1400px) {
+        body {
+            font-size: 1.08rem;
+            line-height: 1.75;
+        }
+
+        main > p,
+        .spoiler-content > p {
+            margin-bottom: 1.4rem;
+        }
+    }
+
+    /* === Адаптивне зменшення на вузьких екранах === */
+    @media (max-width: 768px) {
+        main {
+            padding: 0 1rem;
+            margin: 1.5rem auto;
+        }
+
+        .spoiler-content {
+            padding: 1rem;
+        }
+
+        .spoiler-title {
+            padding: 1rem;
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .image-lightbox { padding: 8px; }
+        .image-lightbox img { max-width: 98vw; max-height: 90vh; }
+        .image-lightbox-close { top: 12px; right: 16px; }
+    }
