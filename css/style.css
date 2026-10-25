@@ -9,8 +9,8 @@
     --radius: 12px;
 
     /* === КЛЮЧОВІ ЗМІННІ === */
-    --container-max: 1200px;     /* макс. ширина контейнера */
-    --text-width: 680px;         /* запасна змінна (вже не обмежуємо текст) */
+    --container-max: 1200px; /* макс. ширина контейнера */
+    --text-width: 680px; /* запасна змінна (вже не обмежуємо текст) */
 
     * {
         box-sizing: border-box;
@@ -28,7 +28,12 @@
         min-height: 100vh;
     }
 
+    hr {
+        margin-bottom: 1rem;
+    }
+
     /* === Навігація === */
+
     header {
         background: var(--surface);
         border-bottom: 1px solid var(--border);
@@ -54,7 +59,10 @@
         text-decoration: none;
     }
 
-    nav { display: flex; gap: 0.5rem; }
+    nav {
+        display: flex;
+        gap: 0.5rem;
+    }
 
     .nav-link {
         text-decoration: none;
@@ -65,10 +73,18 @@
         transition: all 0.2s;
     }
 
-    .nav-link:hover { color: var(--primary); background: #f1f5f9; }
-    .nav-link.active { color: #fff; background: var(--primary); }
+    .nav-link:hover {
+        color: var(--primary);
+        background: #f1f5f9;
+    }
+
+    .nav-link.active {
+        color: #fff;
+        background: var(--primary);
+    }
 
     /* === Main — широкий контейнер === */
+
     main {
         flex: 1;
         width: 100%;
@@ -90,6 +106,7 @@
        ========================================================= */
 
     /* Текстові елементи — на повну ширину контейнера */
+
     main > p,
     main > h2,
     main > h3,
@@ -130,6 +147,7 @@
     }
 
     /* Зображення та відео — та сама ширина, що й текст (контейнер) */
+
     main > img,
     main > video,
     .spoiler-content > img,
@@ -144,6 +162,7 @@
     }
 
     /* Зображення всередині <p>, <li> — звичайні інлайн */
+
     main p img,
     main li img,
     .spoiler-content p img,
@@ -158,6 +177,7 @@
     }
 
     /* === Контейнерні елементи — повна ширина === */
+
     main > .spoiler-list,
     main > .grid,
     main > .card,
@@ -168,6 +188,7 @@
     }
 
     /* === Сітка-роздільник <hr> — тонша === */
+
     main > hr {
         border: none;
         border-top: 1px solid var(--border);
@@ -175,17 +196,21 @@
     }
 
     /* === Card === */
+
     .card {
         background: var(--surface);
         padding: 2rem;
         border-radius: var(--radius);
         border: 1px solid var(--border);
-        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    .card p { margin-bottom: 1rem; }
+    .card p {
+        margin-bottom: 1rem;
+    }
 
     /* === Галерея === */
+
     .grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -213,9 +238,18 @@
         object-fit: cover;
     }
 
-    .audio-box { padding: 1rem; background: #f1f5f9; }
-    audio { width: 100%; }
-    .media-info { padding: 1rem; }
+    .audio-box {
+        padding: 1rem;
+        background: #f1f5f9;
+    }
+
+    audio {
+        width: 100%;
+    }
+
+    .media-info {
+        padding: 1rem;
+    }
 
     .tag {
         font-size: 0.75rem;
@@ -237,6 +271,7 @@
     }
 
     /* === Spoilers === */
+
     .spoiler-list {
         display: flex;
         flex-direction: column;
@@ -254,7 +289,9 @@
         transition: box-shadow 0.2s;
     }
 
-    .spoiler-item:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+    .spoiler-item:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
 
     .spoiler-title {
         padding: 1.25rem 1.5rem;
@@ -270,8 +307,13 @@
         transition: background-color 0.2s;
     }
 
-    .spoiler-title::-webkit-details-marker { display: none; }
-    .spoiler-title:hover { background-color: #f8fafc; }
+    .spoiler-title::-webkit-details-marker {
+        display: none;
+    }
+
+    .spoiler-title:hover {
+        background-color: #f8fafc;
+    }
 
     .spoiler-title::after {
         content: '';
@@ -286,7 +328,10 @@
         flex-shrink: 0;
     }
 
-    .spoiler-item[open] .spoiler-title::after { transform: rotate(-135deg); }
+    .spoiler-item[open] .spoiler-title::after {
+        transform: rotate(-135deg);
+    }
+
     .spoiler-item[open] .spoiler-title {
         border-bottom: 1px solid var(--border);
         background-color: #f1f5f9;
@@ -298,6 +343,7 @@
     }
 
     /* === Quotes === */
+
     blockquote {
         position: relative;
         margin: 24px 0;
@@ -327,8 +373,13 @@
         line-height: 1;
     }
 
-    blockquote p { margin: 0; }
-    blockquote p + p { margin-top: 10px; }
+    blockquote p {
+        margin: 0;
+    }
+
+    blockquote p + p {
+        margin-top: 10px;
+    }
 
     q {
         display: inline;
@@ -341,10 +392,22 @@
         -webkit-box-decoration-break: clone;
     }
 
-    q::before { content: "\00AB"; color: #2d5df5; font-weight: bold; }
-    q::after  { content: "\00BB (c)"; color: #2d5df5; font-weight: bold; font-style: normal; font-size: 0.8em; }
+    q::before {
+        content: "\00AB";
+        color: #2d5df5;
+        font-weight: bold;
+    }
+
+    q::after {
+        content: "\00BB (c)";
+        color: #2d5df5;
+        font-weight: bold;
+        font-style: normal;
+        font-size: 0.8em;
+    }
 
     /* === Interaction === */
+
     main img,
     article img,
     .content img {
@@ -373,7 +436,10 @@
         transition: opacity 0.2s ease, visibility 0.2s ease;
     }
 
-    .image-lightbox.active { opacity: 1; visibility: visible; }
+    .image-lightbox.active {
+        opacity: 1;
+        visibility: visible;
+    }
 
     .image-lightbox img {
         display: block;
@@ -431,7 +497,18 @@
     }
 
     @media (max-width: 600px) {
-        .image-lightbox { padding: 8px; }
-        .image-lightbox img { max-width: 98vw; max-height: 90vh; }
-        .image-lightbox-close { top: 12px; right: 16px; }
+        .image-lightbox {
+            padding: 8px;
+        }
+
+        .image-lightbox img {
+            max-width: 98vw;
+            max-height: 90vh;
+        }
+
+        .image-lightbox-close {
+            top: 12px;
+            right: 16px;
+        }
     }
+}
