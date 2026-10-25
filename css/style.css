@@ -441,27 +441,25 @@
         visibility: visible;
     }
 
-    .image-lightbox img {
-        display: block;
+    .image-lightbox-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* width/height задає JS — тут тільки запасні обмеження */
         max-width: 95vw;
         max-height: 94vh;
-        width: auto;
-        height: auto;
+        line-height: 0;
+    }
+
+    .image-lightbox-inner img {
+        display: block;
+        width: 100%;               /* заповнює обгортку (розмір якої задав JS) */
+        height: 100%;
         object-fit: contain;
         border-radius: 6px;
         box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
         cursor: zoom-out;
-    }
-
-    .image-lightbox-close {
-        position: absolute;
-        top: 16px;
-        right: 24px;
-        color: white;
-        font-size: 36px;
-        line-height: 1;
-        cursor: pointer;
-        user-select: none;
+        background: transparent;
     }
 
     /* === На широких екранах — трохи більший шрифт для читабельності ===
@@ -510,5 +508,13 @@
             top: 12px;
             right: 16px;
         }
+    }
+
+    main > img, .spoiler-content > img {
+        width: auto;
+        max-width: 100%;       /* не ширший за контейнер */
+        max-height: 50vh;      /* ← 50% висоти екрана */
+        object-fit: contain;   /* пропорції збережено */
+        margin: 1.5rem auto;   /* центр по горизонталі */
     }
 }
